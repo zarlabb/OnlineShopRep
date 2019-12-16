@@ -1,7 +1,9 @@
 package Test;
 
-import Page.*;
-
+import org.openqa.selenium.By;
+import org.testng.annotations.DataProvider;
+import Pages.*;
+import org.testng.Assert;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.*;
