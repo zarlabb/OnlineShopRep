@@ -1,5 +1,7 @@
 package Test;
 
+import Businessobjects.User;
+import Dataproviders.Dataproviders;
 import org.openqa.selenium.By;
 import org.testng.annotations.DataProvider;
 import Pages.*;
@@ -18,28 +20,28 @@ public class OnlineShopTests {
         driver = new ChromeDriver();
     }
 
-    @Test
-    public void login() {
+    @Test (dataProvider = "user", dataProviderClass = Dataproviders.class)
+    public void login(User user) {
         driver.get("http://automationpractice.com/index.php");
 
         LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
-        loginPage.login("rrtest@mailinator.com", "654321" );
+        loginPage.login(user.getEmail(), user.getPassword() );
 
 
     }
-    @Test
-    public void searchItemAndBuyIt() {
-        driver.get("http://automationpractice.com/index.php");
-
-        MainPage mainPage = PageFactory.initElements(driver, MainPage.class);
-        mainPage.searchItemAndSelectFirstInList("blouse");
-        //mainPage.goToOrderPage();
-
-        ProductPage productPage = PageFactory.initElements(driver, ProductPage.class);
-        productPage.addToCartAndProceed();
-
-        OrderPage orderPage = PageFactory.initElements(driver, OrderPage.class);
-        orderPage.buyItemByBankWire();
+//    @Test
+//    public void searchItemAndBuyIt() {
+//        driver.get("http://automationpractice.com/index.php");
+//
+//        MainPage mainPage = PageFactory.initElements(driver, MainPage.class);
+//        mainPage.searchItemAndSelectFirstInList("blouse");
+//        //mainPage.goToOrderPage();
+//
+//        ProductPage productPage = PageFactory.initElements(driver, ProductPage.class);
+//        productPage.addToCartAndProceed();
+//
+//        OrderPage orderPage = PageFactory.initElements(driver, OrderPage.class);
+//        orderPage.buyItemByBankWire();
     }
 
     /* @Test
@@ -49,4 +51,4 @@ public class OnlineShopTests {
         driver.findElementByXPath("//a[@ href='#gradle']").click();
 
     }*/
-}
+
