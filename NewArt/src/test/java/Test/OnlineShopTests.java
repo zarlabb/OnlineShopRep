@@ -1,5 +1,6 @@
 package Test;
 
+import Businessobjects.Item;
 import Businessobjects.User;
 import Dataproviders.Dataproviders;
 import org.openqa.selenium.By;
@@ -20,7 +21,7 @@ public class OnlineShopTests {
         driver = new ChromeDriver();
     }
 
-    @Test (dataProvider = "user", dataProviderClass = Dataproviders.class)
+    @Test (dataProvider = "user", dataProviderClass = Dataproviders.class,groups = "Login")
     public void login(User user) {
         driver.get("http://automationpractice.com/index.php");
 
@@ -28,6 +29,27 @@ public class OnlineShopTests {
         loginPage.login(user.getEmail(), user.getPassword() );
 
 
+
+
+
+    }
+
+    @Test (dependsOnGroups = "Login", dataProvider = "item", dataProviderClass = Dataproviders.class)
+    public void searchItemThenAddToCartAndProceed (Item item) {
+        MainPage mainPage = PageFactory.initElements(driver, MainPage.class);
+        mainPage.searchItemAndSelectFirstInList(item.getItemName());
+
+        Assert.assertTrue(driver.findElement(By.tagName("h1")).getText().contains(item.getItemName()));
+
+        ProductPage productPage = PageFactory.initElements(driver, ProductPage.class);
+        productPage.addToCartAndProceed();
+
+    }
+
+    /*@Test ("searchItem")
+    public void addItemToCartAndProceed () {
+        ProductPage productPage = PageFactory.initElements(driver, ProductPage.class);
+        productPage.addToCartAndProceed();*/
     }
 //    @Test
 //    public void searchItemAndBuyIt() {
@@ -42,7 +64,7 @@ public class OnlineShopTests {
 //
 //        OrderPage orderPage = PageFactory.initElements(driver, OrderPage.class);
 //        orderPage.buyItemByBankWire();
-    }
+
 
     /* @Test
     public void openPageA
