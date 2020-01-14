@@ -4,7 +4,7 @@ public class Item {
 
     private String itemName;
     private String sku;
-    private Double price;
+    private String price;
 
     public String getItemName() {return itemName;}
     public void setItemName(String itemName) {this.itemName = itemName;}
@@ -12,13 +12,13 @@ public class Item {
     public String getSku() {return sku;}
     public void setSku(String sku) {this.sku = sku;}
 
-    public Double getPrice() {return price;}
-    public void setPrice(Double price) {this.price = price;}
+    public String getPrice() {return price;}
+    public void setPrice(String price) {this.price = price;}
 
     public Item() {
         this.itemName = "Blouse";
         this.sku = "demo_2";
-        this.price = 27.00;
+        this.price = "27.00";
     }
 
 }

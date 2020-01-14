@@ -44,6 +44,20 @@ public class OnlineShopTests {
         ProductPage productPage = PageFactory.initElements(driver, ProductPage.class);
         productPage.addToCartAndProceed();
 
+        Assert.assertTrue(driver.findElement(By.className("cart_ref")).getText().contains(item.getSku()));
+
+        OrderSummaryPage orderSummaryPage = PageFactory.initElements(driver, OrderSummaryPage.class);
+        orderSummaryPage.proceedToSignIn();
+
+        OrderAddressPage orderAddressPage = PageFactory.initElements(driver, OrderAddressPage.class);
+        orderAddressPage.proceedToShipping();
+
+        OrderShippingPage orderShippingPage = PageFactory.initElements(driver, OrderShippingPage.class);
+        orderShippingPage.proceedToPayment();
+
+        OrderPaymentPage orderPaymentPage = PageFactory.initElements(driver, OrderPaymentPage.class);
+        orderPaymentPage.proceedToPayByBankWire();
+        orderPaymentPage.confirmOrder();
     }
 
     /*@Test ("searchItem")
